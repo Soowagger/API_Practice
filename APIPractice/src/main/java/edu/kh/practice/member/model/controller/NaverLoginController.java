@@ -32,7 +32,7 @@ public class NaverLoginController {
 	@GetMapping("/naverLogin")
 	public String naverCallback() {
 		
-		return "common/naverLogin";
+		return "member/naverLogin";
 	}
 	
 	@PostMapping("/naverLoginData")
