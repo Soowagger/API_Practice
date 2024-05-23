@@ -1,0 +1,105 @@
+package edu.kh.practice.member.model.service;
+
+import java.util.List;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import edu.kh.practice.member.model.dto.Member;
+import edu.kh.practice.member.model.mapper.MemberMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Transactional(rollbackFor = Exception.class)
+@RequiredArgsConstructor
+@Slf4j
+public class MemberServiceImpl implements MemberService {
+	
+	private final MemberMapper mapper;
+	
+	private final BCryptPasswordEncoder bcrypt;
+	
+	@Override
+	public List<Member> selectList() {
+		
+
+		return mapper.selectList();
+	}
+
+	@Override
+	public Member login(Member inputMember) {
+		
+	
+		
+		Member loginMember = mapper.login(inputMember.getMemberId());
+		
+		if(loginMember == null) return null;
+		
+		if(!bcrypt.matches(inputMember.getMemberPw(), loginMember.getMemberPw())) {
+			return null;
+		}
+		
+		loginMember.setMemberPw(null);
+		
+		return loginMember;
+	}
+	
+	// 회원가입 - 아이디 중복 체크
+	@Override
+	public int checkId(String memberId) {
+		
+		return mapper.checkId(memberId);
+	}
+	
+	// 회원가입 - 이메일 중복 체크
+	@Override
+	public int checkEmail(String memberEmail) {
+		
+		
+		
+		return mapper.checkEmail(memberEmail);
+	}
+
+	
+	// 회원가입 - 닉네임 중복 체크
+	@Override
+	public int checkNickname(String memberNickname) {
+		
+		return mapper.checkNickname(memberNickname);
+	}
+
+	
+	// 회원가입(제출)
+	@Override
+	public int signup(Member inputMember, String[] memberAddress) {
+		
+		if(!inputMember.getMemberAddress().equals(",,")) {
+			
+			String address = String.join("^^^", memberAddress);
+			
+			// inputMember 주소로 합쳐진 주소를 세팅 
+			inputMember.setMemberAddress(address);
+			
+			
+		} else { // 주소 입력 X
+			
+			inputMember.setMemberAddress(null); // null 저장
+		}
+		
+		// 비밀번호를 암호화 하여 input member에 세팅
+		String encPw = bcrypt.encode(inputMember.getMemberPw()); 
+		
+		inputMember.setMemberPw(encPw);
+		
+		return mapper.signup(inputMember);
+	}
+	
+	// 네이버 회원가입
+	@Override
+	public int naverSignup(Member newMember, Object object) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}

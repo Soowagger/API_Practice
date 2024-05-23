@@ -1,0 +1,14 @@
+package edu.kh.practice.member.model.service;
+
+import java.util.List;
+
+import edu.kh.practice.member.model.dto.Member;
+
+public interface MemberService {
+
+	List<Member> selectList();
+
+	Member login(Member inputMember);
+
+	
+}

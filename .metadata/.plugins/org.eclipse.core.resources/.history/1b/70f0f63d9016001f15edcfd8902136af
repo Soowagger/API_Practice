@@ -1,0 +1,5 @@
+package edu.kh.practice.common.config;
+
+public class DBConfig {
+
+}

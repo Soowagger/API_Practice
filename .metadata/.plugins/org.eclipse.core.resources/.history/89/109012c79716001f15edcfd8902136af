@@ -1,0 +1,5 @@
+package edu.kh.practice.member.model.service;
+
+public class MemberServiceImpl implements MemberService {
+	
+}

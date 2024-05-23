@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{app.name}">API 연습</title>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <main>
+        <section>
+            <h2>API 연습하기</h2>
+
+            <div>
+                <div>
+                    <h3>현재 유저 정보</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>회원번호</th>
+                                <th>이름</th>
+                                <th>이메일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="member : ${memberList}" th:object="${member}">
+                                <td th:text="*{memberNo}">회원번호</td>
+                                <td th:text="*{memberNickname}">이름</td>
+                                <td th:text="*{memberEmail}">이메일</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>일반 로그인(자동 로그인)</h3>
+                <th:block th:if="${session.loginMember == null}">
+                    <div>                    
+                        <form action="/member/login" method="post" id="loginForm">
+                            
+                            <div>
+                                <input class="InputId" type="text" name="memberId" placeholder="아이디"><br>
+                                <input class="InputPw" type="password" name="memberPw" placeholder="비밀번호">
+                                
+                            </div>
+                            <div>
+                                <label>
+                                    <input type="checkbox" name="autoLogin"> 자동 로그인
+                                </label>
+                            </div>
+
+                            <div>
+                                <button id="loginBtn">로그인</button>
+                                
+
+                            </div>
+
+                            <h3>네이버 로그인</h3>
+                            <!-- 네이버 로그인 버튼 노출 영역 -->
+                            <div id="naver_id_login"></div>
+
+                        </form>
+                    </div>
+                </th:block>
+
+                <th:block th:if="${session.loginMember != null}">
+                    <div th:object="${session.loginMember}">
+                        <p th:text="|*{memberNickname}님 환영합니다.|"></p>
+                    </div>
+                    <div>
+                        <div id="naver_id_login" style="display: none;"></div>
+                        <button type="button" onclick="location.href='/member/logout'">로그아웃</button>                    </div>
+                </th:block>
+
+            </div>
+            
+            <div>
+                <a href="/member/signup">회원가입</a>
+            </div> 
+
+        </section>
+
+    </main>
+    
+    <script th:inline="javascript">
+        const message =  /*[[${message}]]*/ "전달 받은 message";
+        if(message != null) alert(message);
+    </script>
+
+    <script type="text/javascript">
+        var naver_id_login = new naver_id_login("uoiYUgBnF7qZ2w07iyBY", "http://localhost:8080/naverLogin");
+        var state = naver_id_login.getUniqState();
+        naver_id_login.setButton("white", 2,40);
+        naver_id_login.setDomain("http://localhost:8080");
+        naver_id_login.setState(state);
+        naver_id_login.setPopup();
+        naver_id_login.init_naver_id_login();
+    </script>
+
+</body>
+</html>

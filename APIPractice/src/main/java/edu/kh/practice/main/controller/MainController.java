@@ -1,0 +1,29 @@
+package edu.kh.practice.main.controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import edu.kh.practice.member.model.dto.Member;
+import edu.kh.practice.member.model.service.MemberService;
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
+public class MainController {
+	
+	private final MemberService service;
+	
+	@RequestMapping("/")
+	public String mainPage(Model model) {
+		
+		List<Member> memberList = service.selectList();
+		
+		model.addAttribute("memberList", memberList);
+		
+		return "common/main";
+		
+	}
+}

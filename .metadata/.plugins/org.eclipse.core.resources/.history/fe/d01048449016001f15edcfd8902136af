@@ -1,0 +1,7 @@
+package edu.kh.practice.common.config;
+
+@Configuration
+@PropertySource("classpath:/config.properties")
+public class DBConfig {
+
+}

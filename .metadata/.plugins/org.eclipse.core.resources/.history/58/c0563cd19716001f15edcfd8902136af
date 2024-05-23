@@ -1,0 +1,10 @@
+package edu.kh.practice.member.model.service;
+
+import edu.kh.practice.member.model.mapper.MemberMapper;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+private final MemberMapper mapper;
+public class MemberServiceImpl implements MemberService {
+	
+}

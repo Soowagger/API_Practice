@@ -1,0 +1,11 @@
+package edu.kh.practice.member.model.mapper;
+
+import java.util.List;
+
+import edu.kh.practice.member.model.dto.Member;
+
+public interface MemberMapper {
+
+	List<Member> selectList();
+	
+}

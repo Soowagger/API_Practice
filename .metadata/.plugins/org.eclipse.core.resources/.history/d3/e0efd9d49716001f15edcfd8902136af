@@ -1,0 +1,15 @@
+package edu.kh.practice.member.model.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import edu.kh.practice.member.model.mapper.MemberMapper;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+
+@Transactional(rollbackFor = Exception.class)
+@Service
+public class MemberServiceImpl implements MemberService {
+	private final MemberMapper mapper;
+}

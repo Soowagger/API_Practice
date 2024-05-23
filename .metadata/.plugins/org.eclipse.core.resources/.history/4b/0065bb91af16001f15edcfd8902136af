@@ -1,0 +1,21 @@
+package edu.kh.practice.member.model.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import edu.kh.practice.member.model.service.MemberService;
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
+@RequestMapping("member")
+public class MemberController {
+
+	private final MemberService service;
+	
+	public String login() {
+		
+	}
+	
+}

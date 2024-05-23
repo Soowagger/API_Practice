@@ -1,0 +1,51 @@
+package edu.kh.practice.member.model.service;
+
+import java.util.List;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import edu.kh.practice.member.model.dto.Member;
+import edu.kh.practice.member.model.mapper.MemberMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Transactional(rollbackFor = Exception.class)
+@RequiredArgsConstructor
+@Slf4j
+public class MemberServiceImpl implements MemberService {
+	private final MemberMapper mapper;
+	
+	private final BCryptPasswordEncoder bcrypt;
+	
+	@Override
+	public List<Member> selectList() {
+		
+
+		return mapper.selectList();
+	}
+
+	@Override
+	public Member login(Member inputMember) {
+		
+		
+		//bcrypt.encode(문자열) : 문자열을 암호화하여 반환
+		String bcryptPassword = bcrypt.encode(inputMember.getMemberPw());
+		
+		log.debug("bcryptPassword : " + bcryptPassword);
+		// bcryptPassword : $2a$10$mgtPFqZcmxckFQ9cfX5OGOvvV34vgnyZIWXVLzZAzAMU46FZ1Viky
+		
+		
+		Member loginMember = mapper.login(inputMember.getMemberId());
+		
+		if(loginMember == null) return null;
+		
+		if(!bcrypt.matches(inputMember.getMemberPw(), loginMember.getMemberPw())) return null;
+		
+		loginMember.setMemberPw(null);
+		
+		return loginMember;
+	}
+}

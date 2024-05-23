@@ -1,0 +1,20 @@
+package edu.kh.practice.member.model.service;
+
+import java.util.List;
+
+import edu.kh.practice.member.model.dto.Member;
+
+public interface MemberService {
+
+	List<Member> selectList();
+
+	Member login(Member inputMember);
+
+	
+	/** 회원가입 - 아이디 중복 체크
+	 * @param memberId
+	 * @return
+	 */
+	int checkId(String memberId);
+	
+}

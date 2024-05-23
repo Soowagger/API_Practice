@@ -1,0 +1,8 @@
+package edu.kh.practice.member.model.service;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public class MemberServiceImpl implements MemberService {
+	
+}
