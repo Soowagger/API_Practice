@@ -1,4 +1,4 @@
-package edu.kh.practice.member.model.controller;
+package edu.kh.practice.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

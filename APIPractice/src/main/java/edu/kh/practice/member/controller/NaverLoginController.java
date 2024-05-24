@@ -1,4 +1,4 @@
-package edu.kh.practice.member.model.controller;
+package edu.kh.practice.member.controller;
 
 import java.util.Map;
 
@@ -57,7 +57,7 @@ public class NaverLoginController {
 			log.info("멤버 정보 체크 : {}", member);
 			
 			// 네이버로 가입한 유저인지 확인
-			if(member.getNaverLogin().equals("Y")) {
+			if(member.getSocialLoginType().equals("N")) {
 				
 				session.setAttribute("loginMember", member);
 				
@@ -72,17 +72,17 @@ public class NaverLoginController {
 			
 		} else { // 이메일 중복 X (신규 가입 회원)
 			
-	        String dummyPassword = RandomStringUtils.randomAlphanumeric(10); // 임의의 더미 패스워드 생성
+	        String dummyPassword = "naver" + RandomStringUtils.randomAlphanumeric(10); // 임의의 더미 패스워드 생성
 	        
 	        log.info(dummyPassword);
 	        
 	        Member naverNewMember = Member.builder()
 	                                  .memberEmail(naverEmail)
 	                                  .memberNickname(naverNickname)
-	                                  .memberPw(dummyPassword) // 더미 패스워드 설정
+	                                  .memberPw(naverId) // 식별 키
 	                                  .memberAddress(null)
-	                                  .naverLogin("Y")
-	                                  .memberId(naverId) // 식별키
+	                                  .socialLoginType("N") // 네이버면 N
+	                                  .memberId(dummyPassword) // 네이버 + 난수
 	                                  .build();
 	        
 	        
