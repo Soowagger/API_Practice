@@ -85,15 +85,27 @@
     <script th:inline="javascript">
         const message =  /*[[${message}]]*/ "전달 받은 message";
         if(message != null) alert(message);
+
+        const telCheck = /*[[${tel}]]*/ "휴대폰 미인증";
+        const loginMember = /*[[${session.loginMember}]]*/ "로그인 멤버";
+
+
+        if(telCheck == null && loginMember != null) {
+            if(confirm("핸드폰 번호가 등록되지 않았음, 등록 할래?")) {
+                location.href='/myPage/myPage'
+            }
+        }
     </script>
 
+    <!-- 네이버 로그인 시작 -->
     <script type="text/javascript" th:inline="javascript">
+
 		const clientId = /*[[${clientId}]]*/ "클라이언트 키값";
-		
+
 		console.log(clientId);
         var naver_id_login = new naver_id_login(clientId, "http://localhost:8080/naverLogin");
         var state = naver_id_login.getUniqState();
-        naver_id_login.setButton("white", 2,40);
+        naver_id_login.setButton("white", 3,40);
         naver_id_login.setDomain("http://localhost:8080");
         naver_id_login.setState(state);
         naver_id_login.setPopup();

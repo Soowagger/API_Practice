@@ -6720,3 +6720,15 @@ java.lang.InterruptedException
 	at org.eclipse.lsp4e.operations.hover.LSPTextHover.getHoverInfo(LSPTextHover.java:76)
 	at org.eclipse.ui.internal.genericeditor.hover.CompositeTextHover.getHoverInfo2(CompositeTextHover.java:60)
 	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY org.eclipse.lsp4e 1 0 2024-05-26 23:28:15.226
+!MESSAGE [Info]	ESLint server running in node v18.18.2
+
+!ENTRY org.eclipse.lsp4e 1 0 2024-05-26 23:28:15.459
+!MESSAGE [Info]	Using Typescript version (user-setting) 5.2.2 from path "C:\tools\sts-4.22.0.RELEASE\plugins\org.eclipse.wildwebdeveloper_1.1.4.202311211923\node_modules\typescript\lib\tsserver.js"
+
+!ENTRY org.eclipse.lsp4e 1 0 2024-05-26 23:28:15.473
+!MESSAGE [Info]	Typescript Server version info: {version=5.2.2, source=user-setting}
+
+!ENTRY org.eclipse.lsp4e 1 0 2024-05-26 23:28:15.525
+!MESSAGE [Info]	No ES Library found for file: file:///C:/workspace/API_Practice/APIPractice/src/main/resources/static/js/signup.js
