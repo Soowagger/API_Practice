@@ -87,8 +87,11 @@
         if(message != null) alert(message);
     </script>
 
-    <script type="text/javascript">
-        var naver_id_login = new naver_id_login("uoiYUgBnF7qZ2w07iyBY", "http://localhost:8080/naverLogin");
+    <script type="text/javascript" th:inline="javascript">
+		const clientId = /*[[${clientId}]]*/ "클라이언트 키값";
+		
+		console.log(clientId);
+        var naver_id_login = new naver_id_login(clientId, "http://localhost:8080/naverLogin");
         var state = naver_id_login.getUniqState();
         naver_id_login.setButton("white", 2,40);
         naver_id_login.setDomain("http://localhost:8080");

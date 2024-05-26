@@ -3,6 +3,8 @@ package edu.kh.practice.member.model.controller;
 import java.util.Map;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +25,22 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Controller
 @Slf4j
+@PropertySource("classpath:/config.properties")
 public class NaverLoginController {
+	
+	@Value("${spring.naver.login.client.id}")
+	private String clientId;
+	
 	
 	private final MemberMapper mapper; 
 	private final MemberService service; 
 	
 	
 	@GetMapping("/naverLogin")
-	public String naverCallback() {
+	public String naverCallback(Model model) {
+		
+		model.addAttribute("clientId", clientId);
+		
 		
 		return "member/naverLogin";
 	}
