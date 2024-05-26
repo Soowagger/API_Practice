@@ -6,6 +6,7 @@
 	<select id="selectList">
 		SELECT MEMBER_NO, MEMBER_NICKNAME, MEMBER_EMAIL
 		FROM "MEMBER"
+		WHERE MEMBER_DEL_FL = 'N'
 		ORDER BY MEMBER_NO
 	</select>
 	
@@ -59,6 +60,7 @@
 			 DEFAULT,
 			 DEFAULT,
 			 DEFAULT,
+			 DEFAULT,
 			 DEFAULT
 		)
 	</insert>
@@ -83,7 +85,7 @@
 			 DEFAULT,
 			 DEFAULT,
 			 DEFAULT,
-			 'Y'
+			 'N'
 		)
 	</insert>
 	

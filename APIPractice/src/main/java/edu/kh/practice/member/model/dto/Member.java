@@ -25,5 +25,5 @@ public class Member {
 	private String enrollDate;
 	private String memberDelFl;
 	private int authority;
-	private String naverLogin;
+	private String socialLoginType;
 }
